@@ -2,10 +2,10 @@
 <resources>
     <string name="app_name">বেঙ্গল সার্ভিসেস</string>
 
-    <string name="app_id">ca-app-pub-3940256099942544~3347511713</string>
-    <string name="app_open">ca-app-pub-3940256099942544/3419835294</string>
-    <string name="banner">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="fullscreen">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="app_id">ca-app-pub-7920815986886474~5118180608</string>
+    <string name="app_open">ca-app-pub-7920815986886474/9916045869</string>
+    <string name="banner">ca-app-pub-7920815986886474/4761041665</string>
+    <string name="fullscreen">ca-app-pub-7920815986886474/3228468145</string>
 
     <string name="rationCard">রেশন কার্ড</string>
     <string name="voterCard">ভোটার পরিচয়</string>
