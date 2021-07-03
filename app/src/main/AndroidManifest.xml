@@ -9,6 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BengalServices">
+        <activity android:name=".VoterActivity"></activity>
+        <activity android:name=".AwasActivity" />
+        <activity android:name=".RationActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
