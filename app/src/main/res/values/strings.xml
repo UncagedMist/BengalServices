@@ -1,5 +1,45 @@
 <resources>
     <string name="app_name">Bengal Services</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="app_id">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="app_open">ca-app-pub-3940256099942544/3419835294</string>
+    <string name="banner">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="fullscreen">ca-app-pub-3940256099942544/1033173712</string>
+
+    <string name="rationCard">Ration Card</string>
+    <string name="voterCard">Voter Identity</string>
+    <string name="aawaasList">PM Awas Yojna List</string>
+
+    <string name="changeLang">Change Language</string>
+
+    <string name="eRationCard">E-Ration Card</string>
+    <string name="rationVerify">Verify Ration Card</string>
+    <string name="rationEntitle">Know Your Entitlement</string>
+    <string name="rationLink">Ration Aadhaar Link</string>
+    <string name="searchRation">Search Ration Card Details</string>
+    <string name="statusRation">Check Ration Card Status</string>
+    <string name="rationApply">New Ration Card Apply</string>
+    <string name="rationForms">Ration Card Forms</string>
+    <string name="rationAdd">Ration Card Member Addition</string>
+    <string name="rationChange">Change in Ration Card</string>
+    <string name="rationDuplicate">Duplicate Ration Card</string>
+    <string name="rationFPS">Ration FPS Change</string>
+    <string name="rationDelete">Delete Ration Card</string>
+    <string name="rationCategory">Ration Change Category Apply</string>
+    <string name="rationNearest">Nearest Ration FPS</string>
+    <string name="rationCount">View Ration Count</string>
+    <string name="rationWhole">Ration FPS Dealers</string>
+
+    <string name="applyOnline">Apply Online</string>
+    <string name="downloadVoter">Download Voter Card</string>
+    <string name="editVoter">Edit Voter Card</string>
+    <string name="searchVoter">Search Voter</string>
+    <string name="trackApp">Track Application</string>
+    <string name="reprint">Voter Card Reprint</string>
+    <string name="voterOfficial">Voter Card Services</string>
+
+    <string name="beneficiaryList">Beneficiary List</string>
+    <string name="awasList">New Awas List</string>
+    <string name="searchBeneficiary">Search Beneficiary</string>
+
 </resources>

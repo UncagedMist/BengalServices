@@ -1,9 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffb067"
     tools:context=".VoterActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/aboveBanner"
+        android:layout_margin="2dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner"/>
+
+    <ScrollView
+        android:layout_above="@id/belowBanner"
+        android:layout_below="@id/aboveBanner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btnApply"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/applyOnline"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/button_bg"
+                android:textSize="20sp" />
+
+            <Button
+                android:layout_marginTop="15dp"
+                android:id="@+id/btnDownload"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/downloadVoter"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/button_bg"
+                android:textSize="20sp" />
+
+            <Button
+                android:layout_marginTop="15dp"
+                android:id="@+id/btnEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/editVoter"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/button_bg"
+                android:textSize="20sp" />
+
+            <Button
+                android:layout_marginTop="15dp"
+                android:id="@+id/btnSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/searchVoter"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:background="@drawable/button_bg" />
+
+            <Button
+                android:layout_marginTop="15dp"
+                android:id="@+id/btnTrack"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/trackApp"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:background="@drawable/button_bg" />
+
+            <Button
+                android:layout_marginTop="15dp"
+                android:id="@+id/btnReprint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/reprint"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:background="@drawable/button_bg" />
+
+            <Button
+                android:layout_marginTop="15dp"
+                android:id="@+id/btnOfficial"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/voterOfficial"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:background="@drawable/button_bg" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/belowBanner"
+        android:layout_margin="2dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner"/>
+
+</RelativeLayout>

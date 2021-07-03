@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">बंगाल सेवाएं</string>
+
+    <string name="app_id">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="app_open">ca-app-pub-3940256099942544/3419835294</string>
+    <string name="banner">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="fullscreen">ca-app-pub-3940256099942544/1033173712</string>
+
+    <string name="rationCard">राशन कार्ड</string>
+    <string name="voterCard">मतदाता पहचान पत्र</string>
+    <string name="aawaasList">पीएम आवास योजना सूची</string>
+
+    <string name="changeLang">भाषा का चयन करें</string>
+
+    <string name="eRationCard">ई-राशन कार्ड</string>
+    <string name="rationVerify">राशन कार्ड सत्यापित करें</string>
+    <string name="rationEntitle">अपने अधिकार को जानें</string>
+    <string name="rationLink">राशन आधार लिंक</string>
+    <string name="searchRation">राशन कार्ड विवरण खोजें</string>
+    <string name="statusRation">राशन कार्ड की स्थिति की जाँच करें</string>
+    <string name="rationApply">नया राशन कार्ड</string>
+    <string name="rationForms">राशन कार्ड फॉर्म</string>
+    <string name="rationAdd">राशन कार्ड सदस्य जोड़</string>
+    <string name="rationChange">राशन कार्ड में बदलाव</string>
+    <string name="rationDuplicate">डुप्लीकेट राशन कार्ड</string>
+    <string name="rationFPS">राशन एफ.पी.एस परिवर्तन</string>
+    <string name="rationDelete">राशन कार्ड हटाएं</string>
+    <string name="rationCategory">राशन परिवर्तन श्रेणी लागू करें</string>
+    <string name="rationNearest">निकटतम राशन एफ.पी.एस</string>
+    <string name="rationCount">राशन गणना देखें</string>
+    <string name="rationWhole">राशन एफ.पी.एस डीलर</string>
+
+    <string name="applyOnline">ऑनलाइन आवेदन</string>
+    <string name="downloadVoter">मतदाता कार्ड डाउनलोड करें</string>
+    <string name="editVoter">मतदाता कार्ड संपादित करें</string>
+    <string name="searchVoter">मतदाता खोजें</string>
+    <string name="trackApp">आवेदन की स्थिति</string>
+    <string name="reprint">मतदाता कार्ड पुनर्मुद्रण</string>
+    <string name="voterOfficial">मतदाता कार्ड सेवाएँ</string>
+
+    <string name="beneficiaryList">लाभार्थी सूची</string>
+    <string name="awasList">नई अवास सूची</string>
+    <string name="searchBeneficiary">लाभार्थी खोजें</string>
+
+</resources>

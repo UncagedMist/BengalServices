@@ -1,9 +1,215 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffb067"
     tools:context=".RationActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/aboveBanner"
+        android:layout_margin="2dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner"/>
+
+    <ScrollView
+        android:layout_above="@id/belowBanner"
+        android:layout_below="@id/aboveBanner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/btnRationE"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/eRationCard"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/button_bg"
+                android:textSize="20sp" />
+
+            <Button
+                android:layout_marginTop="15dp"
+                android:id="@+id/btnVerifyRation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/rationVerify"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/button_bg"
+                android:textSize="20sp" />
+
+            <Button
+                android:layout_marginTop="15dp"
+                android:id="@+id/btnEntitlement"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/rationEntitle"
+                android:textColor="#FFFFFF"
+                android:background="@drawable/button_bg"
+                android:textSize="20sp" />
+
+            <Button
+                android:layout_marginTop="15dp"
+                android:id="@+id/btnRationLink"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/rationLink"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:background="@drawable/button_bg" />
+
+            <Button
+                android:layout_marginTop="15dp"
+                android:id="@+id/btnSearchRation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/searchRation"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:background="@drawable/button_bg" />
+
+            <Button
+                android:layout_marginTop="15dp"
+                android:id="@+id/btnStatusRation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/statusRation"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:background="@drawable/button_bg" />
+
+            <Button
+                android:layout_marginTop="15dp"
+                android:id="@+id/btnRationApply"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/rationApply"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:background="@drawable/button_bg" />
+
+            <Button
+                android:layout_marginTop="15dp"
+                android:id="@+id/btnForms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/rationForms"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:background="@drawable/button_bg" />
+
+            <Button
+                android:layout_marginTop="15dp"
+                android:id="@+id/btnRationAdd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/rationAdd"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:background="@drawable/button_bg" />
+
+            <Button
+                android:layout_marginTop="15dp"
+                android:id="@+id/btnRationChange"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/rationChange"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:background="@drawable/button_bg" />
+
+            <Button
+                android:layout_marginTop="15dp"
+                android:id="@+id/btnRationDuplicate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/rationDuplicate"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:background="@drawable/button_bg" />
+
+            <Button
+                android:layout_marginTop="15dp"
+                android:id="@+id/btnRationFPS"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/rationFPS"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:background="@drawable/button_bg" />
+
+            <Button
+                android:layout_marginTop="15dp"
+                android:id="@+id/btnDelete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/rationDelete"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:background="@drawable/button_bg" />
+
+            <Button
+                android:layout_marginTop="15dp"
+                android:id="@+id/btnCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/rationCategory"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:background="@drawable/button_bg" />
+
+            <Button
+                android:layout_marginTop="15dp"
+                android:id="@+id/btnNear"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/rationNearest"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:background="@drawable/button_bg" />
+
+            <Button
+                android:layout_marginTop="15dp"
+                android:id="@+id/btnCount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/rationCount"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:background="@drawable/button_bg" />
+
+            <Button
+                android:layout_marginTop="15dp"
+                android:id="@+id/btnWhole"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/rationWhole"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:background="@drawable/button_bg" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/belowBanner"
+        android:layout_margin="2dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        ads:adSize="BANNER"
+        android:layout_alignParentBottom="true"
+        ads:adUnitId="@string/banner"/>
+
+</RelativeLayout>
