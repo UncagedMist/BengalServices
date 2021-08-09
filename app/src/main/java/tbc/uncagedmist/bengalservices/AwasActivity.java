@@ -3,29 +3,24 @@ package tbc.uncagedmist.bengalservices;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
-import androidx.browser.customtabs.CustomTabsIntent;
 
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
-import com.google.android.gms.ads.AdError;
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.FullScreenContentCallback;
-import com.google.android.gms.ads.LoadAdError;
-import com.google.android.gms.ads.interstitial.InterstitialAd;
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
+import com.facebook.ads.Ad;
+import com.facebook.ads.AdError;
+import com.facebook.ads.AdListener;
+import com.facebook.ads.AdSize;
+import com.facebook.ads.AdView;
+import com.facebook.ads.InterstitialAd;
+import com.facebook.ads.InterstitialAdListener;
 
 import java.util.Locale;
 
@@ -33,11 +28,11 @@ import tbc.uncagedmist.bengalservices.Common.Common;
 
 public class AwasActivity extends AppCompatActivity {
 
-    AdView aboveBanner, bottomBanner;
+    AdView adView;
 
     Button btnBene, btnAwas, btnSearch;
 
-    private InterstitialAd mInterstitialAd;
+    private InterstitialAd interstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,126 +42,119 @@ public class AwasActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_awas);
 
-        AdRequest adRequest = new AdRequest.Builder().build();
-
-        InterstitialAd.load(
-                AwasActivity.this,
-                getString(R.string.fullscreen),
-                adRequest, new InterstitialAdLoadCallback() {
-                    @Override
-                    public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
-                        mInterstitialAd = interstitialAd;
-
-                        mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback(){
-                            @Override
-                            public void onAdDismissedFullScreenContent() {
-                                Log.d("TAG", "The ad was dismissed.");
-                            }
-
-                            @Override
-                            public void onAdFailedToShowFullScreenContent(AdError adError) {
-                                Log.d("TAG", "The ad failed to show.");
-                            }
-
-                            @Override
-                            public void onAdShowedFullScreenContent() {
-                                mInterstitialAd = null;
-                                Log.d("TAG", "The ad was shown.");
-                            }
-                        });
-                    }
-
-                    @Override
-                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
-                        mInterstitialAd = null;
-                    }
-                });
+        loadBanner();
+        loadFullscreen();
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(getResources().getString(R.string.app_name));
-
-        aboveBanner = findViewById(R.id.aboveBanner);
-        bottomBanner = findViewById(R.id.belowBanner);
 
         btnBene = findViewById(R.id.btnBeneficiary);
         btnAwas = findViewById(R.id.btnAwas);
         btnSearch = findViewById(R.id.btnSearch);
 
-        aboveBanner.loadAd(adRequest);
-        bottomBanner.loadAd(adRequest);
 
         onClickImplementation();
-
-        adMethod();
     }
 
-    private void adMethod() {
-        aboveBanner.setAdListener(new AdListener() {
+    private void loadFullscreen() {
+        interstitialAd = new InterstitialAd(
+                this,
+                getString(R.string.fb_fullscreen)
+        );
+
+        // Create listeners for the Interstitial Ad
+        InterstitialAdListener interstitialAdListener = new InterstitialAdListener() {
             @Override
-            public void onAdLoaded() {
-                // Code to be executed when an ad finishes loading.
+            public void onInterstitialDisplayed(Ad ad) {
+                // Interstitial ad displayed callback
+                Log.e("TAG", "Interstitial ad displayed.");
             }
 
             @Override
-            public void onAdFailedToLoad(LoadAdError adError) {
-                // Code to be executed when an ad request fails.
+            public void onInterstitialDismissed(Ad ad) {
+                // Interstitial dismissed callback
+                Log.e("TAG", "Interstitial ad dismissed.");
             }
 
             @Override
-            public void onAdOpened() {
-                // Code to be executed when an ad opens an overlay that
-                // covers the screen.
+            public void onError(Ad ad, AdError adError) {
+                // Ad error callback
+                Log.e("TAG", "Interstitial ad failed to load: " + adError.getErrorMessage());
             }
 
             @Override
-            public void onAdClicked() {
-                // Code to be executed when the user clicks on an ad.
+            public void onAdLoaded(Ad ad) {
+                // Interstitial ad is loaded and ready to be displayed
+                Log.d("TAG", "Interstitial ad is loaded and ready to be displayed!");
+                // Show the ad
             }
 
             @Override
-            public void onAdClosed() {
-                // Code to be executed when the user is about to return
-                // to the app after tapping on an ad.
-            }
-        });
-
-        bottomBanner.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() {
-                // Code to be executed when an ad finishes loading.
+            public void onAdClicked(Ad ad) {
+                // Ad clicked callback
+                Log.d("TAG", "Interstitial ad clicked!");
             }
 
             @Override
-            public void onAdFailedToLoad(LoadAdError adError) {
-                // Code to be executed when an ad request fails.
+            public void onLoggingImpression(Ad ad) {
+                // Ad impression logged callback
+                Log.d("TAG", "Interstitial ad impression logged!");
+            }
+        };
+
+        // For auto play video ads, it's recommended to load the ad
+        // at least 30 seconds before it is shown
+        interstitialAd.loadAd(
+                interstitialAd.buildLoadAdConfig()
+                        .withAdListener(interstitialAdListener)
+                        .build());
+    }
+
+    private void loadBanner() {
+        adView = new AdView(
+                this,
+                getString(R.string.fb_banner),
+                AdSize.BANNER_HEIGHT_50
+        );
+
+        // Find the Ad Container
+        LinearLayout adContainer = findViewById(R.id.banner_container);
+
+        // Add the ad view to your activity layout
+        adContainer.addView(adView);
+
+        AdListener adListener = new AdListener() {
+            @Override
+            public void onError(Ad ad, AdError adError) {
+                // Ad error callback
             }
 
             @Override
-            public void onAdOpened() {
-                // Code to be executed when an ad opens an overlay that
-                // covers the screen.
+            public void onAdLoaded(Ad ad) {
+                // Ad loaded callback
             }
 
             @Override
-            public void onAdClicked() {
-                // Code to be executed when the user clicks on an ad.
+            public void onAdClicked(Ad ad) {
+                // Ad clicked callback
             }
 
             @Override
-            public void onAdClosed() {
-                // Code to be executed when the user is about to return
-                // to the app after tapping on an ad.
+            public void onLoggingImpression(Ad ad) {
+                // Ad impression logged callback
             }
-        });
+        };
 
+        // Request an ad
+        adView.loadAd(adView.buildLoadAdConfig().withAdListener(adListener).build());
     }
 
     private void onClickImplementation() {
         btnBene.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mInterstitialAd != null) {
-                    mInterstitialAd.show(AwasActivity.this);
+                if (interstitialAd.isAdLoaded()) {
+                    interstitialAd.show();
                 }
                 else {
                     Intent intent = new Intent(AwasActivity.this,ResultActivity.class);
@@ -180,8 +168,8 @@ public class AwasActivity extends AppCompatActivity {
         btnAwas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mInterstitialAd != null) {
-                    mInterstitialAd.show(AwasActivity.this);
+                if (interstitialAd.isAdLoaded()) {
+                    interstitialAd.show();
                 }
                 else {
                     Intent intent = new Intent(AwasActivity.this,ResultActivity.class);
@@ -195,8 +183,8 @@ public class AwasActivity extends AppCompatActivity {
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mInterstitialAd != null) {
-                    mInterstitialAd.show(AwasActivity.this);
+                if (interstitialAd.isAdLoaded()) {
+                    interstitialAd.show();
                 }
                 else {
                     Intent intent = new Intent(AwasActivity.this,ResultActivity.class);
@@ -225,5 +213,16 @@ public class AwasActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = getSharedPreferences("Settings",MODE_PRIVATE).edit();
         editor.putString("My_Lang",lang);
         editor.apply();
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (adView != null) {
+            adView.destroy();
+        }
+        if (interstitialAd != null) {
+            interstitialAd.destroy();
+        }
+        super.onDestroy();
     }
 }
