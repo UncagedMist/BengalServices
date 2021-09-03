@@ -2,20 +2,34 @@ package tbc.uncagedmist.bengalservices;
 
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.graphics.Color;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -26,6 +40,8 @@ import com.facebook.ads.AdSize;
 import com.facebook.ads.AdView;
 import com.facebook.ads.InterstitialAd;
 import com.facebook.ads.InterstitialAdListener;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.play.core.appupdate.AppUpdateInfo;
 import com.google.android.play.core.appupdate.AppUpdateManager;
 import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
@@ -37,179 +53,212 @@ import com.google.android.play.core.review.ReviewManagerFactory;
 import com.google.android.play.core.tasks.OnCompleteListener;
 import com.google.android.play.core.tasks.OnSuccessListener;
 import com.google.android.play.core.tasks.Task;
+import com.ironsource.mediationsdk.ISBannerSize;
+import com.ironsource.mediationsdk.IronSource;
+import com.ironsource.mediationsdk.IronSourceBannerLayout;
+import com.ironsource.mediationsdk.logger.IronSourceError;
+import com.ironsource.mediationsdk.sdk.BannerListener;
+import com.shashank.sony.fancydialoglib.Animation;
+import com.shashank.sony.fancydialoglib.FancyAlertDialog;
+import com.shashank.sony.fancydialoglib.Icon;
 
 import java.util.Locale;
 
+import tbc.uncagedmist.bengalservices.Common.Common;
+import tbc.uncagedmist.bengalservices.Fragments.HomeFragment;
+import tbc.uncagedmist.bengalservices.Fragments.SettingFragment;
+import tbc.uncagedmist.bengalservices.Utility.CurvedBottomNavigationView;
+
 public class MainActivity extends AppCompatActivity {
 
-    private static final int REQUEST_CODE = 101;
-    Button btnRation, btnVoter, btnLang,btnAwas;
+    private static final int PERMISSION_REQUEST_CODE = 31;
 
-    AdView adView;
+    CurvedBottomNavigationView curvedBottomNavigationView;
+    FloatingActionButton fab, fabShare;
 
-    private InterstitialAd interstitialAd;
+    FrameLayout bannerContainer;
+    IronSourceBannerLayout banner;
 
-    ReviewManager manager;
-    ReviewInfo reviewInfo;
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull  int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
+        switch (requestCode)
+        {
+            case PERMISSION_REQUEST_CODE:
+            {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)    {
+                    Toast.makeText(this, "PERMISSION GRANTED..", Toast.LENGTH_SHORT).show();
+                }
+                else    {
+                    Toast.makeText(this, "PERMISSION DENIED...", Toast.LENGTH_SHORT).show();
+                }
+            }
+            break;
+        }
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Window window = getWindow();
+            window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+                    WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+        }
+
         checkAppUpdate();
-        loadLocale();
+
+        IronSource.init(
+                this,
+                getString(R.string.IS_APP_KEY),
+                IronSource.AD_UNIT.BANNER
+        );
 
         setContentView(R.layout.activity_main);
 
-        loadBanner();
-        loadFullscreen();
+        createAndLoadBanner();
 
-        manager = ReviewManagerFactory.create(MainActivity.this);
+        IronSource.shouldTrackNetworkState(this, true);
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle(getResources().getString(R.string.app_name));
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setTitle(R.string.app_name);
 
-        btnRation = findViewById(R.id.btnRation);
-        btnVoter = findViewById(R.id.btnVoter);
-        btnLang = findViewById(R.id.btnLang);
-        btnAwas = findViewById(R.id.btnAwas);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED)   {
+            requestPermissions(new String[]{
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+            }, PERMISSION_REQUEST_CODE);
+        }
 
+        fab = findViewById(R.id.fab);
+        fabShare = findViewById(R.id.stateShare);
+        curvedBottomNavigationView = findViewById(R.id.customBottomBar);
 
-        btnRation.setOnClickListener(new View.OnClickListener() {
+        HomeFragment homeFragment = new HomeFragment();
+        FragmentManager manager = getSupportFragmentManager();
+
+        manager.beginTransaction().add(R.id.main_frame,homeFragment).commit();
+
+        curvedBottomNavigationView.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    Fragment fragment;
+
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                        if (item.getItemId() == R.id.action_home) {
+                            toolbar.setBackgroundColor(getColor(R.color.color1));
+                            getSupportActionBar().setTitle(R.string.app_name);
+                            fragment = new HomeFragment();
+                            fab.setImageResource(R.drawable.ic_baseline_home_24);
+                        }
+                        else if (item.getItemId() == R.id.action_setting) {
+                            toolbar.setBackgroundColor(getColor(R.color.color2));
+                            getSupportActionBar().setTitle("Settings");
+                            fragment = new SettingFragment();
+                            fab.setImageResource(R.drawable.ic_baseline_settings_applications_24);
+                        }
+                        return loadFragment(fragment);
+                    }
+                });
+
+        loadFragment(HomeFragment.getInstance());
+        fab.setImageResource(R.drawable.ic_baseline_home_24);
+
+        fabShare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (interstitialAd.isAdLoaded()) {
-                    interstitialAd.show();
-                }
-                else {
-                    startActivity(new Intent(MainActivity.this,RationActivity.class));
-                }
-            }
-        });
-
-        btnVoter.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (interstitialAd.isAdLoaded()) {
-                    interstitialAd.show();
-                }
-                else {
-                    startActivity(new Intent(MainActivity.this,VoterActivity.class));
-                }
-            }
-        });
-
-        btnLang.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                selectAppLang();
-            }
-        });
-
-        btnAwas.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (interstitialAd.isAdLoaded()) {
-                    interstitialAd.show();
-                }
-                else {
-                    startActivity(new Intent(MainActivity.this,AwasActivity.class));
-                }
+                Common.shareApp(MainActivity.this);
             }
         });
     }
 
-    private void loadFullscreen() {
-        interstitialAd = new InterstitialAd(
-                this,
-                getString(R.string.fb_fullscreen)
+
+    private void createAndLoadBanner() {
+        bannerContainer = findViewById(R.id.bannerContainer);
+        banner = IronSource.createBanner(this, ISBannerSize.BANNER);
+
+        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(
+                FrameLayout.LayoutParams.MATCH_PARENT,
+                FrameLayout.LayoutParams.WRAP_CONTENT
         );
 
-        // Create listeners for the Interstitial Ad
-        InterstitialAdListener interstitialAdListener = new InterstitialAdListener() {
-            @Override
-            public void onInterstitialDisplayed(Ad ad) {
-                // Interstitial ad displayed callback
-                Log.e("TAG", "Interstitial ad displayed.");
-            }
+        bannerContainer.addView(banner, 0, layoutParams);
 
+        banner.setBannerListener(new BannerListener() {
             @Override
-            public void onInterstitialDismissed(Ad ad) {
-                // Interstitial dismissed callback
-                Log.e("TAG", "Interstitial ad dismissed.");
+            public void onBannerAdLoaded() {
+                banner.setVisibility(View.VISIBLE);
             }
-
             @Override
-            public void onError(Ad ad, AdError adError) {
-                // Ad error callback
-                Log.e("TAG", "Interstitial ad failed to load: " + adError.getErrorMessage());
+            public void onBannerAdLoadFailed(IronSourceError error) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        bannerContainer.removeAllViews();
+                    }
+                });
             }
-
             @Override
-            public void onAdLoaded(Ad ad) {
-                // Interstitial ad is loaded and ready to be displayed
-                Log.d("TAG", "Interstitial ad is loaded and ready to be displayed!");
-                // Show the ad
-            }
+            public void onBannerAdClicked() {
 
+            }
             @Override
-            public void onAdClicked(Ad ad) {
-                // Ad clicked callback
-                Log.d("TAG", "Interstitial ad clicked!");
-            }
+            public void onBannerAdScreenPresented() {
 
+            }
             @Override
-            public void onLoggingImpression(Ad ad) {
-                // Ad impression logged callback
-                Log.d("TAG", "Interstitial ad impression logged!");
-            }
-        };
+            public void onBannerAdScreenDismissed() {
 
-        // For auto play video ads, it's recommended to load the ad
-        // at least 30 seconds before it is shown
-        interstitialAd.loadAd(
-                interstitialAd.buildLoadAdConfig()
-                        .withAdListener(interstitialAdListener)
-                        .build());
+            }
+            @Override
+            public void onBannerAdLeftApplication() {
+
+            }
+        });
+
+        IronSource.loadBanner(banner, (String)"DefaultBanner");
     }
 
-    private void loadBanner() {
-        adView = new AdView(
-                this,
-                getString(R.string.fb_banner),
-                AdSize.BANNER_HEIGHT_50
-        );
+    @Override
+    public void onBackPressed() {
+        new FancyAlertDialog.Builder(MainActivity.this)
+                .setTitle("Games Wallpaper App")
+                .setBackgroundColor(Color.parseColor("#303F9F"))  //Don't pass R.color.colorvalue
+                .setMessage("Customize your Phone's Look with our new Wallpaper App.Support us by downloading our other apps!")
+                .setNegativeBtnText("Don't")
+                .setPositiveBtnBackground(Color.parseColor("#FF4081"))  //Don't pass R.color.colorvalue
+                .setPositiveBtnText("Support US")
+                .setNegativeBtnBackground(Color.parseColor("#FFA9A7A8"))  //Don't pass R.color.colorvalue
+                .setAnimation(Animation.POP)
+                .isCancellable(false)
+                .setIcon(R.drawable.ic_star_border_black_24dp, Icon.Visible)
+                .OnPositiveClicked(() ->
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=tbc.uncagedmist.mobilewallpapers"))))
+                .OnNegativeClicked(() -> {
+                })
+                .build();
+    }
 
-        // Find the Ad Container
-        LinearLayout adContainer = findViewById(R.id.banner_container);
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        IronSource.destroyBanner(banner);
+    }
 
-        // Add the ad view to your activity layout
-        adContainer.addView(adView);
-
-        AdListener adListener = new AdListener() {
-            @Override
-            public void onError(Ad ad, AdError adError) {
-                // Ad error callback
-            }
-
-            @Override
-            public void onAdLoaded(Ad ad) {
-                // Ad loaded callback
-            }
-
-            @Override
-            public void onAdClicked(Ad ad) {
-                // Ad clicked callback
-            }
-
-            @Override
-            public void onLoggingImpression(Ad ad) {
-                // Ad impression logged callback
-            }
-        };
-
-        // Request an ad
-        adView.loadAd(adView.buildLoadAdConfig().withAdListener(adListener).build());
+    private boolean loadFragment(Fragment fragment) {
+        if (fragment != null) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.main_frame, fragment)
+                    .commit();
+            return true;
+        }
+        return false;
     }
 
     private void checkAppUpdate() {
@@ -224,7 +273,10 @@ public class MainActivity extends AppCompatActivity {
                         result.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE))    {
 
                     try {
-                        appUpdateManager.startUpdateFlowForResult(result,AppUpdateType.IMMEDIATE,MainActivity.this,REQUEST_CODE);
+                        appUpdateManager.startUpdateFlowForResult(
+                                result,AppUpdateType.IMMEDIATE,
+                                MainActivity.this,
+                                PERMISSION_REQUEST_CODE);
                     } catch (IntentSender.SendIntentException e) {
                         e.printStackTrace();
                     }
@@ -233,88 +285,4 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void selectAppLang() {
-        final String[] langList = {"English","हिंदी","বাংলা"};
-
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
-        alertDialog.setTitle("Choose Language / भाषा चुनें");
-        alertDialog.setSingleChoiceItems(langList, -1, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                if (i == 0) {
-                    setLocale("en");
-                    recreate();
-                }
-                else if (i == 1)    {
-                    setLocale("hi");
-                    recreate();
-                }
-                else if (i == 2)    {
-                    setLocale("bn");
-                    recreate();
-                }
-                dialogInterface.dismiss();
-            }
-        });
-        alertDialog.create();
-        alertDialog.show();
-    }
-
-    //set language
-    private void setLocale(String lang) {
-        Locale locale = new Locale(lang);
-        Locale.setDefault(locale);
-        Configuration config = new Configuration();
-        config.locale = locale;
-        getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
-
-        //shared prefs
-        SharedPreferences.Editor editor = getSharedPreferences("Settings",MODE_PRIVATE).edit();
-        editor.putString("My_Lang",lang);
-        editor.apply();
-    }
-
-    //load language
-    private void loadLocale()   {
-        SharedPreferences prefs = getSharedPreferences("Settings", Activity.MODE_PRIVATE);
-        String language = prefs.getString("My_Lang","");
-        setLocale(language);
-    }
-
-    @Override
-    public void onBackPressed() {
-        Task<ReviewInfo> request = manager.requestReviewFlow();
-
-        request.addOnCompleteListener(new OnCompleteListener<ReviewInfo>() {
-            @Override
-            public void onComplete(@NonNull Task<ReviewInfo> task) {
-                if (task.isSuccessful())    {
-                    reviewInfo = task.getResult();
-
-                    Task<Void> flow = manager.launchReviewFlow(MainActivity.this,reviewInfo);
-
-                    flow.addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void result) {
-
-                        }
-                    });
-                }
-                else {
-                    Toast.makeText(MainActivity.this, "ERROR...", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
-
-    @Override
-    protected void onDestroy() {
-        if (adView != null) {
-            adView.destroy();
-        }
-        if (interstitialAd != null) {
-            interstitialAd.destroy();
-        }
-        super.onDestroy();
-    }
 }

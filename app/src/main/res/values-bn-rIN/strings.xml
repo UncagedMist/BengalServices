@@ -2,11 +2,6 @@
 <resources>
     <string name="app_name">বেঙ্গল সার্ভিসেস</string>
 
-    <string name="fb_app_id">233242938435282</string>
-
-    <string name="fb_banner">233242938435282_233243231768586</string>
-    <string name="fb_fullscreen">233242938435282_233244025101840</string>
-
     <string name="rationCard">রেশন কার্ড</string>
     <string name="voterCard">ভোটার পরিচয়</string>
     <string name="aawaasList">প্রধানমন্ত্রী আবাস যোজনার তালিকা</string>
@@ -42,5 +37,10 @@
     <string name="beneficiaryList">উপকারী তালিকা</string>
     <string name="awasList">নতুন আবাস তালিকা</string>
     <string name="searchBeneficiary">সুবিধাভোগী অনুসন্ধান করুন</string>
+
+    <string name="ADMOB_APP_ID">ca-app-pub-7920815986886474~5118180608</string>
+
+    <string name="IS_APP_KEY">10cb6852d</string>
+    <string name="ADMOB_OPEN">ca-app-pub-7920815986886474/9916045869</string>
 
 </resources>

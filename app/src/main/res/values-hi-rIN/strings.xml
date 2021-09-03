@@ -2,11 +2,6 @@
 <resources>
     <string name="app_name">बंगाल सेवाएं</string>
 
-    <string name="fb_app_id">233242938435282</string>
-
-    <string name="fb_banner">233242938435282_233243231768586</string>
-    <string name="fb_fullscreen">233242938435282_233244025101840</string>
-
     <string name="rationCard">राशन कार्ड</string>
     <string name="voterCard">मतदाता पहचान पत्र</string>
     <string name="aawaasList">पीएम आवास योजना सूची</string>
@@ -42,5 +37,10 @@
     <string name="beneficiaryList">लाभार्थी सूची</string>
     <string name="awasList">नई अवास सूची</string>
     <string name="searchBeneficiary">लाभार्थी खोजें</string>
+
+    <string name="ADMOB_APP_ID">ca-app-pub-7920815986886474~5118180608</string>
+
+    <string name="IS_APP_KEY">10cb6852d</string>
+    <string name="ADMOB_OPEN">ca-app-pub-7920815986886474/9916045869</string>
 
 </resources>

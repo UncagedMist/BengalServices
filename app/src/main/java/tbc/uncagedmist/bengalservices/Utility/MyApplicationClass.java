@@ -10,6 +10,10 @@ import android.os.Build;
 import android.os.Bundle;
 
 import com.facebook.ads.AudienceNetworkAds;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.ironsource.mediationsdk.IronSource;
 
 public class MyApplicationClass extends Application {
 
@@ -21,6 +25,9 @@ public class MyApplicationClass extends Application {
 
     MyNetworkReceiver mNetworkReceiver;
 
+    @SuppressLint("StaticFieldLeak")
+    private static AppOpenManager appOpenManager;
+
     public static Context getContext() {
         return context;
     }
@@ -30,7 +37,16 @@ public class MyApplicationClass extends Application {
         super.onCreate();
         AudienceNetworkAds.initialize(this);
 
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) { }
+        });
+
         context = getApplicationContext();
+
+        IronSource.setMetaData("Facebook_IS_CacheFlag","IMAGE");
+
+        appOpenManager = new AppOpenManager(this);
 
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
             @Override
