@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".AwasActivity">
+
+    <TextView
+        android:layout_marginStart="10dp"
+        android:textColor="#1c1160"
+        android:textSize="40sp"
+        android:text="PM Awas Yojna"
+        android:fontFamily="@font/bubble_letters"
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ImageView
+        android:layout_centerInParent="true"
+        android:src="@drawable/background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerVertical="true">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnAwas"
+            style="@android:style/Widget.Button"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:textColor="@color/white"
+            android:text="@string/awasList"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:background="@drawable/btn_back"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnBeneficiary"
+            android:layout_marginTop="10dp"
+            style="@android:style/Widget.Button"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:textColor="@color/white"
+            android:text="@string/beneficiaryList"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:background="@drawable/btn_back"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSearch"
+            android:layout_marginTop="10dp"
+            style="@android:style/Widget.Button"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:textColor="@color/white"
+            android:text="@string/searchBeneficiary"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:background="@drawable/btn_back"/>
+
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_alignParentBottom="true"
+        android:id="@+id/bannerContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>

@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".RationActivity">
+
+    <TextView
+        android:id="@+id/txt"
+        android:layout_marginStart="10dp"
+        android:textColor="#1c1160"
+        android:textSize="40sp"
+        android:text="Ration Card"
+        android:fontFamily="@font/bubble_letters"
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ScrollView
+        android:layout_above="@id/bannerContainer"
+        android:background="@drawable/background"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/txt"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnRationE"
+                style="@android:style/Widget.Button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:textColor="@color/white"
+                android:text="@string/eRationCard"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:background="@drawable/btn_back"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnRationStatus"
+                android:layout_marginTop="10dp"
+                style="@android:style/Widget.Button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:textColor="@color/white"
+                android:text="Ration Card Status"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:background="@drawable/btn_back"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnRationLink"
+                android:layout_marginTop="10dp"
+                style="@android:style/Widget.Button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:textColor="@color/white"
+                android:text="Ration Aadhaar Link Status"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:background="@drawable/btn_back"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnRationEntitle"
+                android:layout_marginTop="10dp"
+                style="@android:style/Widget.Button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:textColor="@color/white"
+                android:text="Know Ration Entitlement"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:background="@drawable/btn_back"/>
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnRationForm"
+                android:layout_marginTop="10dp"
+                style="@android:style/Widget.Button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:textColor="@color/white"
+                android:text="Ration Form Apply"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:background="@drawable/btn_back"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnRationNearest"
+                android:layout_marginTop="10dp"
+                style="@android:style/Widget.Button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:textColor="@color/white"
+                android:text="Nearest Fair Price Shop"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:background="@drawable/btn_back"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_marginTop="10dp"
+                style="@android:style/Widget.Button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:background="@drawable/btn_back"
+                android:id="@+id/btnRationNew"
+                android:text="@string/rationApply"/>
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_marginTop="10dp"
+                style="@android:style/Widget.Button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:background="@drawable/btn_back"
+                android:id="@+id/btnRationMember"
+                android:text="Apply for New Family Member"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_marginTop="10dp"
+                style="@android:style/Widget.Button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:background="@drawable/btn_back"
+                android:id="@+id/btnRationEdit"
+                android:text="Ration Card Correction"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_marginTop="10dp"
+                style="@android:style/Widget.Button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:background="@drawable/btn_back"
+                android:id="@+id/btnRationShift"
+                android:text="Shifting of Ration Shop"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_marginTop="10dp"
+                style="@android:style/Widget.Button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:background="@drawable/btn_back"
+                android:id="@+id/btnRationCancel"
+                android:text="Cancel Ration Card"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_marginTop="10dp"
+                style="@android:style/Widget.Button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:background="@drawable/btn_back"
+                android:id="@+id/btnRationCategory"
+                android:text="Change Ration Card Category"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_marginTop="10dp"
+                style="@android:style/Widget.Button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:background="@drawable/btn_back"
+                android:id="@+id/btnrationNon"
+                android:text="Apply Non-Subsidised Ration Card"/>
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_marginTop="10dp"
+                style="@android:style/Widget.Button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:background="@drawable/btn_back"
+                android:id="@+id/btnRationChangeKero"
+                android:text="Change Kerosene Shop of part family"/>
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_marginTop="10dp"
+                style="@android:style/Widget.Button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:background="@drawable/btn_back"
+                android:id="@+id/btnRationMobile"
+                android:text="Link Mobile Number"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_marginTop="10dp"
+                style="@android:style/Widget.Button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:background="@drawable/btn_back"
+                android:id="@+id/btnRationDown"
+                android:text="Download e-Ration Card"/>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <FrameLayout
+        android:layout_alignParentBottom="true"
+        android:id="@+id/bannerContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>

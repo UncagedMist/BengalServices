@@ -1,6 +1,13 @@
 <resources>
     <string name="app_name">Bengal Services</string>
 
+    <string name="app_id">ca-app-pub-7920815986886474~5118180608</string>
+
+    <string name="app_open">ca-app-pub-7920815986886474/9916045869</string>
+    <string name="full">ca-app-pub-7920815986886474/3228468145</string>
+    <string name="banner">ca-app-pub-7920815986886474/4761041665</string>
+    <string name="ad_native">ca-app-pub-7920815986886474/2524188968</string>
+
     <string name="rationCard">Ration Card</string>
     <string name="voterCard">Voter Identity</string>
     <string name="aawaasList">PM Awas Yojna List</string>
@@ -37,9 +44,4 @@
     <string name="awasList">New Awas List</string>
     <string name="searchBeneficiary">Search Beneficiary</string>
 
-
-    <string name="ADMOB_APP_ID">ca-app-pub-7920815986886474~5118180608</string>
-
-    <string name="IS_APP_KEY">10cb6852d</string>
-    <string name="ADMOB_OPEN">ca-app-pub-7920815986886474/9916045869</string>
 </resources>

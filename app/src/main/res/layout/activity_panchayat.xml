@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".PanchayatActivity">
+
+    <TextView
+        android:id="@+id/txt"
+        android:layout_marginStart="10dp"
+        android:textColor="#1c1160"
+        android:textSize="30sp"
+        android:text="Panchayat Election"
+        android:fontFamily="@font/bubble_letters"
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+    <ScrollView
+        android:layout_above="@id/bannerContainer"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/txt"
+        android:background="@drawable/background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnSchedule"
+                style="@android:style/Widget.Button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:textColor="@color/white"
+                android:text="Election Schedule"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:background="@drawable/btn_back"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnOnline"
+                android:layout_marginTop="10dp"
+                style="@android:style/Widget.Button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:textColor="@color/white"
+                android:text="Apply Online"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:background="@drawable/btn_back"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnElectoral"
+                android:layout_marginTop="10dp"
+                style="@android:style/Widget.Button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:textColor="@color/white"
+                android:text="Electoral Roll"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:background="@drawable/btn_back"/>
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnForms"
+                android:layout_marginTop="10dp"
+                style="@android:style/Widget.Button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:textColor="@color/white"
+                android:text="Roll Revision Forms"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:background="@drawable/btn_back"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnBlo"
+                android:layout_marginTop="10dp"
+                style="@android:style/Widget.Button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:textColor="@color/white"
+                android:text="List of B.L.O."
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:background="@drawable/btn_back"/>
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnBla"
+                android:layout_marginTop="10dp"
+                style="@android:style/Widget.Button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:textColor="@color/white"
+                android:text="B.L.A."
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:background="@drawable/btn_back"/>
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnClaim"
+                android:layout_marginTop="10dp"
+                style="@android:style/Widget.Button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:textColor="@color/white"
+                android:text="List of Claim &amp; Objections"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:background="@drawable/btn_back"/>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <FrameLayout
+        android:layout_alignParentBottom="true"
+        android:id="@+id/bannerContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>

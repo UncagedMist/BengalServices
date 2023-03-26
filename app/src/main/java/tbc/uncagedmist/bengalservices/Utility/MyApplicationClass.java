@@ -13,40 +13,34 @@ import com.facebook.ads.AudienceNetworkAds;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
-import com.ironsource.mediationsdk.IronSource;
 
 public class MyApplicationClass extends Application {
-
-    @SuppressLint("StaticFieldLeak")
-    private static Context context;
-
     @SuppressLint("StaticFieldLeak")
     public static Activity mActivity;
-
     MyNetworkReceiver mNetworkReceiver;
 
     @SuppressLint("StaticFieldLeak")
     private static AppOpenManager appOpenManager;
 
-    public static Context getContext() {
-        return context;
-    }
+    private static MyApplicationClass instance;
+
+    private boolean showAds = true;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        AudienceNetworkAds.initialize(this);
+        instance = this;
+
+        AudienceNetworkAds.initialize(instance);
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) { }
         });
 
-        context = getApplicationContext();
-
-        IronSource.setMetaData("Facebook_IS_CacheFlag","IMAGE");
-
-        appOpenManager = new AppOpenManager(this);
+        if (showAds)    {
+            appOpenManager = new AppOpenManager(instance);
+        }
 
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
             @Override
@@ -93,5 +87,17 @@ public class MyApplicationClass extends Application {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             registerReceiver(mNetworkReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
         }
+    }
+
+    public static MyApplicationClass getInstance() {
+        return instance;
+    }
+
+    public boolean isShowAds() {
+        return showAds;
+    }
+
+    public void setShowAds(boolean showAds) {
+        this.showAds = showAds;
     }
 }

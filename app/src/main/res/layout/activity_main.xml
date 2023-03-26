@@ -1,59 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:background="@color/blue">
+    android:background="#1c1160">
 
-    <RelativeLayout
+    <ImageView
+        android:id="@+id/top"
+        android:src="@drawable/top_background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+    <TextView
+        android:layout_marginStart="10dp"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        android:text="West Bengal \n\t\t\t Panchayat \n\t\t\t\t\t\t Election"
+        android:fontFamily="@font/bubble_letters"
+        android:layout_marginTop="25dp"
+        android:layout_toLeftOf="@id/img"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:src="@mipmap/ic_launcher" />
+
+    <ScrollView
+        android:layout_above="@id/bannerContainer"
+        android:layout_marginTop="10dp"
+        android:layout_below="@id/top"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/toolbar"
-            layout="@layout/app_bar"/>
-
-        <FrameLayout
-            android:id="@+id/main_frame"
-            android:layout_above="@id/bannerContainer"
+        <LinearLayout
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/toolbar"/>
+            android:layout_height="wrap_content">
 
-        <FrameLayout
-            android:id="@+id/bannerContainer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@id/customBottomBar" />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnPanchayat"
+                style="@android:style/Widget.Button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:textColor="@color/white"
+                android:text="Panchayat Election"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:background="@drawable/btn_back"/>
 
-        <tbc.uncagedmist.bengalservices.Utility.CurvedBottomNavigationView
-            android:id="@+id/customBottomBar"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            app:menu="@menu/menu_item"
-            android:layout_alignParentBottom="true"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnVoter"
+                style="@android:style/Widget.Button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:textColor="@color/white"
+                android:text="Voter Id Card"
+                android:layout_marginTop="8dp"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:background="@drawable/btn_back"/>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/stateShare"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@id/bannerContainer"
-            android:layout_margin="16dp"
-            android:layout_alignParentEnd="true"
-            android:backgroundTint="@color/blue"
-            android:src="@drawable/ic_baseline_share_24" />
 
-    </RelativeLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnRation"
+                style="@android:style/Widget.Button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:textColor="@color/white"
+                android:text="Ration Card"
+                android:layout_marginTop="8dp"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:background="@drawable/btn_back"/>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_gravity="bottom|center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="20sp"
-        app:tint="@android:color/white"
-        app:backgroundTint="@color/color1"/>
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnAwas"
+                style="@android:style/Widget.Button"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:textColor="@color/white"
+                android:text="PM Awas Yojna"
+                android:layout_marginTop="8dp"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:background="@drawable/btn_back"/>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <FrameLayout
+        android:id="@+id/bannerContainer"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>
